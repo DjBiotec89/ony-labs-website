@@ -188,7 +188,7 @@
     .visual-shell { position: relative; z-index: 2; width: min(94%, 800px); margin-inline: auto; border-radius: clamp(30px, 2.7vw, 50px); padding: clamp(10px, 1vw, 16px); border: 1px solid rgba(255,216,107,.24); background: linear-gradient(145deg, rgba(255,216,107,.11), rgba(125,92,255,.08)), rgba(16,7,24,.76); box-shadow: 0 44px 140px rgba(0,0,0,.56), 0 0 90px rgba(125,92,255,.16); transform: perspective(1200px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translate3d(var(--float-x, 0px), var(--float-y, 0px), 0); transition: transform .75s var(--ease), box-shadow .75s var(--ease), border-color .75s var(--ease); will-change: transform; }
     .visual-shell:hover { border-color: rgba(255,216,107,.42); box-shadow: 0 54px 160px rgba(0,0,0,.62), 0 0 120px rgba(125,92,255,.24), 0 0 48px rgba(255,216,107,.10); }
     .visual-inner { position: relative; overflow: hidden; border-radius: calc(clamp(30px, 2.7vw, 50px) - 10px); background: #100718; border: 1px solid rgba(255,255,255,.08); }
-    .visual-inner img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 62% 50%; filter: saturate(1.05) contrast(1.04); transform: translateX(-6%) scale(1.12); transform-origin: center; }
+    .visual-inner img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 66% 50%; filter: saturate(1.05) contrast(1.04); transform: translateX(-10%) scale(1.15); transform-origin: center; }
     .visual-inner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,3,11,.10), transparent 46%, rgba(7,3,11,.28)), linear-gradient(180deg, transparent 58%, rgba(7,3,11,.62)); pointer-events: none; }
     .visual-note { position: absolute; left: clamp(18px, 2vw, 32px); right: clamp(18px, 2vw, 32px); bottom: clamp(18px, 2vw, 32px); z-index: 3; padding: 18px 20px; border-radius: 22px; border: 1px solid rgba(255,216,107,.18); background: rgba(13,7,18,.66); backdrop-filter: blur(18px) saturate(150%); }
     .visual-note strong { display: block; font-size: clamp(16px, 1.1vw, 22px); letter-spacing: -.03em; }
@@ -297,7 +297,7 @@
       .hero-copy, .lead { font-size: clamp(16px, 4.7vw, 19px); line-height: 1.44; }
       .hero-visual { padding-inline: 0; }
       .visual-shell { width: 100%; transform: none; }
-      .visual-inner img { aspect-ratio: 4 / 3; object-position: 62% 50%; transform: translateX(-7%) scale(1.14); }
+      .visual-inner img { aspect-ratio: 4 / 3; object-position: 68% 50%; transform: translateX(-14%) scale(1.18); }
       .visual-note { left: 14px; right: 14px; bottom: 14px; padding: 14px 15px; border-radius: 18px; font-size: 13px; }
       .floating-chip { display: none; }
       .section { padding: 78px 0; }
@@ -505,17 +505,29 @@
       const canvas = document.querySelector('[data-signal-canvas]');
       if (canvas && !reduceMotion) {
         const ctx = canvas.getContext('2d', { alpha: true });
-        let width = 0, height = 0, dpr = 1, frame = 0;
+        let width = 0, height = 0, dpr = 1, frame = 0, raf = 0, running = true;
         const pointer = { x: innerWidth * .62, y: innerHeight * .28, tx: innerWidth * .62, ty: innerHeight * .28 };
-        const nodes = Array.from({ length: Math.min(96, Math.max(44, Math.floor(innerWidth / 18))) }, (_, i) => ({
-          x: Math.random() * innerWidth,
-          y: Math.random() * innerHeight,
-          vx: (Math.random() - .5) * .22,
-          vy: (Math.random() - .5) * .22,
-          r: Math.random() * 1.8 + .7,
-          phase: Math.random() * Math.PI * 2,
-          gold: i % 5 === 0
-        }));
+        let nodes = [];
+        function rebuildNodes() {
+          const count = Math.min(innerWidth < 760 ? 42 : 92, Math.max(34, Math.floor(width / (innerWidth < 760 ? 11 : 18))));
+          const rows = Math.ceil(count / 13);
+          nodes = Array.from({ length: count }, (_, i) => {
+            const col = (i * 7) % 13;
+            const row = Math.floor(i / 13);
+            const seed = Math.sin(i * 97.231) * 10000;
+            const jitter = seed - Math.floor(seed);
+            return {
+              hx: ((col + .5 + (jitter - .5) * .72) / 13) * width,
+              hy: ((row + .65 + ((jitter * 3.7) % 1 - .5) * .68) / rows) * height,
+              x: 0,
+              y: 0,
+              r: (jitter * 1.4) + .65,
+              phase: jitter * Math.PI * 2,
+              amp: innerWidth < 760 ? 5 + jitter * 10 : 9 + jitter * 18,
+              gold: i % 5 === 0
+            };
+          });
+        }
         function resize() {
           dpr = Math.min(devicePixelRatio || 1, 1.7);
           width = canvas.clientWidth = innerWidth;
@@ -523,49 +535,45 @@
           canvas.width = Math.floor(width * dpr);
           canvas.height = Math.floor(height * dpr);
           ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          rebuildNodes();
         }
         function draw() {
-          frame += .006;
-          pointer.x += (pointer.tx - pointer.x) * .055;
-          pointer.y += (pointer.ty - pointer.y) * .055;
+          if (!running) return;
+          frame += .005;
+          pointer.x += (pointer.tx - pointer.x) * .045;
+          pointer.y += (pointer.ty - pointer.y) * .045;
           ctx.clearRect(0, 0, width, height);
           const grad = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, Math.min(width, height) * .62);
-          grad.addColorStop(0, 'rgba(255,216,107,.11)');
-          grad.addColorStop(.33, 'rgba(125,92,255,.07)');
+          grad.addColorStop(0, 'rgba(255,216,107,.10)');
+          grad.addColorStop(.36, 'rgba(125,92,255,.065)');
           grad.addColorStop(1, 'rgba(7,3,11,0)');
           ctx.fillStyle = grad;
           ctx.fillRect(0, 0, width, height);
           for (const n of nodes) {
-            const dx = pointer.x - n.x, dy = pointer.y - n.y;
+            const dx = pointer.x - n.hx, dy = pointer.y - n.hy;
             const dist = Math.hypot(dx, dy) || 1;
-            if (dist < 320) {
-              n.vx += dx / dist * .004;
-              n.vy += dy / dist * .004;
-            }
-            n.vx += Math.cos(frame + n.phase) * .002;
-            n.vy += Math.sin(frame + n.phase) * .002;
-            n.vx *= .988; n.vy *= .988;
-            n.x += n.vx; n.y += n.vy;
-            if (n.x < -20) n.x = width + 20; if (n.x > width + 20) n.x = -20;
-            if (n.y < -20) n.y = height + 20; if (n.y > height + 20) n.y = -20;
+            const influence = Math.max(0, 1 - dist / 360);
+            const repel = influence * (innerWidth < 760 ? 18 : 32);
+            n.x = n.hx + Math.cos(frame + n.phase) * n.amp - (dx / dist) * repel;
+            n.y = n.hy + Math.sin(frame * 1.17 + n.phase) * n.amp - (dy / dist) * repel;
           }
           for (let i = 0; i < nodes.length; i++) {
             for (let j = i + 1; j < nodes.length; j++) {
               const a = nodes[i], b = nodes[j];
               const d = Math.hypot(a.x - b.x, a.y - b.y);
-              if (d < 128) {
-                const alpha = (1 - d / 128) * .15;
+              if (d < 132) {
+                const alpha = (1 - d / 132) * .13;
                 ctx.strokeStyle = `rgba(255,216,107,${alpha})`;
-                ctx.lineWidth = .7;
+                ctx.lineWidth = .65;
                 ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
               }
             }
           }
           for (const n of nodes) {
-            ctx.fillStyle = n.gold ? 'rgba(255,216,107,.72)' : 'rgba(185,164,255,.48)';
+            ctx.fillStyle = n.gold ? 'rgba(255,216,107,.70)' : 'rgba(185,164,255,.44)';
             ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
           }
-          requestAnimationFrame(draw);
+          raf = requestAnimationFrame(draw);
         }
         addEventListener('resize', resize, { passive: true });
         addEventListener('pointermove', e => {
@@ -573,6 +581,11 @@
           root.style.setProperty('--mx', `${(e.clientX / innerWidth * 100).toFixed(2)}%`);
           root.style.setProperty('--my', `${(e.clientY / innerHeight * 100).toFixed(2)}%`);
         }, { passive: true });
+        document.addEventListener('visibilitychange', () => {
+          running = !document.hidden;
+          if (running && !raf) draw();
+          if (!running) { cancelAnimationFrame(raf); raf = 0; }
+        });
         resize(); draw();
       }
 
