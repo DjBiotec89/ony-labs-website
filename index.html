@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ony-Labs | Kreativtechnologie-Studio</title>
+  <meta name="description" content="Ony-Labs ist ein Schweizer Kreativtechnologie-Studio für Marken, Websites, Automationen, Medien, lokale KI-Systeme und kontrollierte digitale Produkte.">
+  <meta property="og:title" content="Ony-Labs | Kreativtechnologie-Studio">
+  <meta property="og:description" content="Marke, Design, Web, Automationen, Medien und kontrollierte KI-Systeme aus einer Hand.">
+  <meta property="og:type" content="website">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07030b;
+      --bg-2: #100718;
+      --ink: #f8f3ea;
+      --muted: #c3b9cf;
+      --quiet: #867893;
+      --gold: #ffd86b;
+      --gold-2: #edae45;
+      --violet: #7d5cff;
+      --violet-2: #3a1d6d;
+      --plum: #180a24;
+      --panel: rgba(255,255,255,.052);
+      --panel-2: rgba(255,255,255,.078);
+      --line: rgba(255,216,107,.16);
+      --line-violet: rgba(125,92,255,.26);
+      --shadow: rgba(0,0,0,.52);
+      --max: 1800px;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: "Segoe UI Variable", "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 8%, rgba(255,216,107,.14), transparent 34rem),
+        radial-gradient(circle at 78% 4%, rgba(125,92,255,.22), transparent 42rem),
+        radial-gradient(circle at 52% 96%, rgba(58,29,109,.28), transparent 48rem),
+        linear-gradient(180deg, #07030b 0%, #100718 46%, #08040d 100%);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      pointer-events: none;
+      opacity: .10;
+      background-image:
+        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 76px 76px;
+      mask-image: radial-gradient(circle at 54% 20%, black, transparent 78%);
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 71;
+      pointer-events: none;
+      opacity: .032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E");
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, video { display: block; max-width: 100%; }
+    p, h1, h2, h3 { margin: 0; }
+    button, input { font: inherit; }
+    .shell { width: min(var(--max), calc(100% - clamp(28px, 7vw, 180px))); margin-inline: auto; }
+    .section { padding: clamp(94px, 10vw, 180px) 0; border-top: 1px solid rgba(255,216,107,.09); }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      padding: 14px 0;
+      background: linear-gradient(180deg, rgba(7,3,11,.9), rgba(7,3,11,.55));
+      backdrop-filter: blur(24px) saturate(150%);
+      border-bottom: 1px solid rgba(255,216,107,.12);
+    }
+    .nav-inner { min-height: 54px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 14px; font-weight: 760; letter-spacing: .18em; text-transform: uppercase; font-size: 13px; }
+    .mark {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 15px;
+      border: 1px solid rgba(255,216,107,.34);
+      background:
+        radial-gradient(circle at 50% 34%, transparent 0 18%, var(--gold) 19% 29%, transparent 30%),
+        linear-gradient(135deg, transparent 0 36%, var(--gold) 37% 48%, transparent 49%),
+        linear-gradient(225deg, transparent 0 42%, var(--violet) 43% 56%, transparent 57%),
+        #12071b;
+      box-shadow: inset 0 0 0 1px rgba(125,92,255,.28), 0 0 28px rgba(125,92,255,.18);
+    }
+    .mark::after { content: ""; position: absolute; left: 50%; bottom: -7px; width: 7px; height: 7px; background: var(--gold); transform: translateX(-50%) rotate(45deg); box-shadow: 0 13px 0 rgba(125,92,255,.92); }
+    .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 48px); color: var(--muted); font-size: 14px; }
+    .nav-links a { transition: color .35s var(--ease); }
+    .nav-links a:hover { color: var(--gold); }
+
+    .pill {
+      min-height: 46px;
+      padding: 0 18px 0 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,216,107,.22);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(255,255,255,.045);
+      color: var(--ink);
+      font-weight: 760;
+      letter-spacing: -.015em;
+      white-space: nowrap;
+      transition: transform .45s var(--ease), border-color .45s var(--ease), background .45s var(--ease), box-shadow .45s var(--ease);
+    }
+    .pill::after { content: "→"; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 999px; background: rgba(255,255,255,.09); color: var(--gold); transition: transform .45s var(--ease); }
+    .pill:hover { transform: translateY(-2px); border-color: rgba(255,216,107,.48); box-shadow: 0 16px 48px rgba(0,0,0,.30); }
+    .pill:hover::after { transform: translateX(2px); }
+    .pill.primary { background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #16091f; border-color: transparent; box-shadow: 0 18px 64px rgba(255,216,107,.22); }
+    .pill.primary::after { background: rgba(22,9,31,.12); color: #16091f; }
+
+    .hero {
+      position: relative;
+      min-height: calc(100dvh - 83px);
+      padding: clamp(64px, 7vh, 110px) 0 clamp(74px, 9vh, 140px);
+      display: grid;
+      grid-template-columns: minmax(470px, .88fr) minmax(560px, 1.12fr);
+      gap: clamp(54px, 7vw, 150px);
+      align-items: center;
+    }
+    .micro { display: inline-flex; align-items: center; gap: 12px; color: var(--gold); font-size: clamp(11px, .68vw, 13px); letter-spacing: .22em; text-transform: uppercase; margin-bottom: clamp(22px, 2vw, 34px); }
+    .micro::before { content: ""; width: 28px; height: 1px; background: var(--gold); opacity: .76; }
+    h1 { font-size: clamp(72px, 7.5vw, 166px); letter-spacing: -.082em; line-height: .83; max-width: 9.5ch; text-wrap: balance; }
+    .hero-copy { margin-top: clamp(24px, 2.5vw, 42px); max-width: 61ch; color: var(--muted); font-size: clamp(18px, 1.35vw, 28px); line-height: 1.36; }
+    .hero-actions { margin-top: clamp(28px, 3vw, 48px); display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-proof { margin-top: clamp(30px, 3vw, 54px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 680px; }
+    .proof-item { padding: 16px 18px; border: 1px solid rgba(255,216,107,.14); border-radius: 18px; background: rgba(255,255,255,.036); color: var(--muted); font-size: 13px; }
+    .proof-item strong { display: block; color: var(--ink); margin-bottom: 3px; font-size: 14px; }
+
+    .hero-visual { position: relative; min-height: clamp(520px, 54vw, 850px); display: grid; place-items: center; }
+    .hero-visual::before, .hero-visual::after { content: ""; position: absolute; inset: 9%; border-radius: 999px; border: 1px solid rgba(255,216,107,.14); animation: spin 34s linear infinite; }
+    .hero-visual::after { inset: 22%; border-color: rgba(125,92,255,.24); animation-duration: 42s; animation-direction: reverse; }
+    .visual-shell { position: relative; z-index: 2; width: min(100%, 860px); border-radius: clamp(30px, 2.7vw, 50px); padding: clamp(10px, 1vw, 16px); border: 1px solid rgba(255,216,107,.24); background: linear-gradient(145deg, rgba(255,216,107,.11), rgba(125,92,255,.08)), rgba(16,7,24,.76); box-shadow: 0 44px 140px rgba(0,0,0,.56), 0 0 90px rgba(125,92,255,.16); transform: rotate(-1deg); }
+    .visual-inner { position: relative; overflow: hidden; border-radius: calc(clamp(30px, 2.7vw, 50px) - 10px); background: #100718; border: 1px solid rgba(255,255,255,.08); }
+    .visual-inner img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 50%; filter: saturate(1.05) contrast(1.04); }
+    .visual-inner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,3,11,.10), transparent 46%, rgba(7,3,11,.28)), linear-gradient(180deg, transparent 58%, rgba(7,3,11,.62)); pointer-events: none; }
+    .visual-note { position: absolute; left: clamp(18px, 2vw, 32px); right: clamp(18px, 2vw, 32px); bottom: clamp(18px, 2vw, 32px); z-index: 3; padding: 18px 20px; border-radius: 22px; border: 1px solid rgba(255,216,107,.18); background: rgba(13,7,18,.66); backdrop-filter: blur(18px) saturate(150%); }
+    .visual-note strong { display: block; font-size: clamp(16px, 1.1vw, 22px); letter-spacing: -.03em; }
+    .visual-note span { display: block; color: var(--muted); margin-top: 5px; }
+    .floating-chip { position: absolute; z-index: 4; padding: 11px 14px; border-radius: 999px; border: 1px solid rgba(255,216,107,.22); background: rgba(20,10,30,.72); color: var(--gold); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 14px 44px rgba(0,0,0,.34); }
+    .floating-chip.one { left: -2%; top: 18%; }
+    .floating-chip.two { right: -1%; bottom: 22%; color: #d8caff; border-color: rgba(125,92,255,.30); }
+
+    .intro { max-width: min(1160px, 80vw); }
+    h2 { font-size: clamp(48px, 6vw, 128px); line-height: .87; letter-spacing: -.074em; max-width: 11ch; text-wrap: balance; }
+    .lead { margin-top: clamp(20px, 2vw, 34px); color: var(--muted); font-size: clamp(18px, 1.3vw, 27px); line-height: 1.38; max-width: 68ch; }
+
+    .capability-grid { margin-top: clamp(48px, 6vw, 104px); display: grid; grid-template-columns: 1.15fr .85fr .85fr; gap: clamp(18px, 2vw, 34px); }
+    .capability { min-height: clamp(330px, 23vw, 520px); padding: clamp(30px, 3vw, 56px); border-radius: 36px; border: 1px solid rgba(255,216,107,.14); background: var(--panel); box-shadow: inset 0 1px 0 rgba(255,255,255,.06); display: flex; flex-direction: column; justify-content: space-between; }
+    .capability:first-child { grid-row: span 2; min-height: clamp(680px, 48vw, 980px); background: radial-gradient(circle at 25% 15%, rgba(255,216,107,.17), transparent 26rem), linear-gradient(145deg, rgba(255,255,255,.084), rgba(255,255,255,.028)); }
+    .capability:nth-child(3) { transform: translateY(clamp(20px, 2.4vw, 44px)); background: linear-gradient(180deg, rgba(125,92,255,.15), rgba(255,255,255,.034)); }
+    .capability small, .method small { color: var(--gold); letter-spacing: .14em; text-transform: uppercase; font-size: 11px; }
+    .capability h3 { margin-top: 24px; font-size: clamp(30px, 3vw, 68px); line-height: .92; letter-spacing: -.058em; }
+    .capability:first-child h3 { font-size: clamp(50px, 5.4vw, 118px); max-width: 10ch; }
+    .capability p { color: var(--muted); margin-top: 18px; font-size: clamp(16px, 1.05vw, 21px); max-width: 52ch; }
+
+    .work-band { margin-top: clamp(48px, 5vw, 90px); display: grid; grid-template-columns: .84fr 1.16fr; gap: clamp(18px, 2vw, 34px); align-items: stretch; }
+    .statement { min-height: clamp(420px, 30vw, 640px); padding: clamp(34px, 4vw, 70px); border-radius: 42px; border: 1px solid var(--line); background: linear-gradient(145deg, #ffd86b, #edae45); color: #16091f; display: flex; flex-direction: column; justify-content: space-between; }
+    .statement strong { font-size: clamp(42px, 5vw, 106px); line-height: .86; letter-spacing: -.075em; max-width: 9.5ch; }
+    .statement span { max-width: 48ch; color: rgba(22,9,31,.68); font-weight: 640; }
+    .method-list { display: grid; gap: clamp(14px, 1.4vw, 24px); }
+    .method { padding: clamp(24px, 2.5vw, 44px); border-radius: 28px; border: 1px solid rgba(125,92,255,.22); background: rgba(255,255,255,.045); }
+    .method h3 { margin-top: 12px; font-size: clamp(24px, 2.2vw, 48px); line-height: .96; letter-spacing: -.045em; }
+    .method p { color: var(--muted); margin-top: 12px; max-width: 62ch; }
+
+    .motion-card { margin-top: clamp(50px, 6vw, 100px); display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(22px, 4vw, 80px); align-items: center; padding: clamp(30px, 4vw, 76px); border-radius: 44px; border: 1px solid rgba(255,216,107,.16); background: radial-gradient(circle at 80% 12%, rgba(255,216,107,.14), transparent 24rem), linear-gradient(135deg, rgba(125,92,255,.12), rgba(255,255,255,.035)); box-shadow: inset 0 1px 0 rgba(255,255,255,.065); }
+    .motion-card h3 { font-size: clamp(40px, 4.8vw, 98px); line-height: .88; letter-spacing: -.072em; max-width: 10ch; }
+    .motion-card p { color: var(--muted); margin-top: 22px; font-size: clamp(17px, 1.18vw, 24px); max-width: 58ch; }
+    .video-shell { border-radius: 30px; padding: 10px; border: 1px solid rgba(255,216,107,.18); background: rgba(9,4,13,.72); overflow: hidden; }
+    .video-shell video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 22px; opacity: .92; }
+
+    .agent-card { margin-top: clamp(46px, 5vw, 84px); padding: clamp(30px, 4vw, 72px); border-radius: 42px; border: 1px solid rgba(255,216,107,.15); background: radial-gradient(circle at 76% 18%, rgba(255,216,107,.12), transparent 25rem), linear-gradient(135deg, rgba(125,92,255,.12), rgba(255,255,255,.035)); display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 90px); align-items: center; }
+    .agent-card h3 { font-size: clamp(36px, 4.4vw, 90px); line-height: .88; letter-spacing: -.068em; }
+    .agent-card p { color: var(--muted); margin-top: 20px; font-size: clamp(17px, 1.16vw, 23px); max-width: 58ch; }
+    .agent-preview { border-radius: 30px; padding: 12px; border: 1px solid rgba(255,216,107,.18); background: rgba(9,4,13,.74); }
+    .bubble { padding: 16px 18px; border-radius: 22px; background: rgba(255,255,255,.06); color: var(--muted); margin: 10px 0; }
+    .bubble.user { margin-left: 12%; color: var(--ink); background: rgba(125,92,255,.14); border: 1px solid rgba(125,92,255,.22); }
+    .bubble strong { color: var(--gold); }
+
+    .cta-wrap { padding: clamp(100px, 11vw, 190px) 0; border-top: 1px solid rgba(255,216,107,.1); }
+    .cta { border-radius: clamp(34px, 3vw, 58px); background: radial-gradient(circle at 86% 18%, rgba(255,216,107,.22), transparent 30rem), radial-gradient(circle at 20% 100%, rgba(125,92,255,.22), transparent 30rem), linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.028)); border: 1px solid rgba(255,216,107,.18); padding: clamp(38px, 5vw, 86px); display: grid; grid-template-columns: 1fr auto; gap: 34px; align-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+    .cta h2 { max-width: 12ch; }
+    .cta p { margin-top: 18px; color: var(--muted); max-width: 62ch; font-size: clamp(17px, 1.18vw, 24px); }
+
+    footer { border-top: 1px solid rgba(255,216,107,.1); padding: 36px 0; color: var(--quiet); font-size: 14px; }
+    footer .shell { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+
+    .agent-launch { position: fixed; right: 22px; bottom: 22px; z-index: 50; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 18px; border: 1px solid rgba(255,216,107,.42); border-radius: 999px; background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #16091f; font-weight: 820; letter-spacing: -.02em; box-shadow: 0 18px 50px rgba(0,0,0,.42); cursor: pointer; }
+    .agent-launch::before { content: ""; width: 9px; height: 9px; border-radius: 999px; background: #16091f; box-shadow: 0 0 0 6px rgba(22,9,31,.12); }
+    .agent-panel { position: fixed; right: 22px; bottom: 88px; z-index: 49; width: min(440px, calc(100vw - 32px)); max-height: min(700px, calc(100dvh - 118px)); display: none; grid-template-rows: auto 1fr auto; overflow: hidden; border-radius: 28px; border: 1px solid rgba(255,216,107,.18); background: rgba(13,7,18,.95); box-shadow: 0 28px 90px rgba(0,0,0,.55); backdrop-filter: blur(24px); }
+    .agent-panel[data-open="true"] { display: grid; }
+    .agent-head { display: flex; align-items: start; justify-content: space-between; gap: 18px; padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,216,107,.12); }
+    .agent-head strong { display: block; font-size: 16px; letter-spacing: -.025em; }
+    .agent-head span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+    .agent-close { width: 34px; height: 34px; border-radius: 999px; border: 1px solid rgba(255,216,107,.18); background: transparent; color: var(--ink); cursor: pointer; font-size: 18px; }
+    .agent-log { display: grid; align-content: start; gap: 10px; padding: 18px; overflow-y: auto; }
+    .agent-msg { max-width: 92%; padding: 12px 14px; border-radius: 18px; border: 1px solid rgba(255,216,107,.12); background: rgba(255,255,255,.045); color: var(--ink); font-size: 14px; white-space: pre-wrap; }
+    .agent-msg.user { justify-self: end; background: rgba(125,92,255,.16); border-color: rgba(125,92,255,.26); }
+    .agent-msg.system { color: var(--muted); }
+    .agent-quick { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 14px; }
+    .agent-chip { border: 1px solid rgba(255,216,107,.13); border-radius: 999px; background: rgba(255,255,255,.045); color: var(--ink); padding: 8px 10px; font: inherit; font-size: 12px; cursor: pointer; }
+    .agent-form { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 14px; border-top: 1px solid rgba(255,216,107,.12); background: rgba(8,4,12,.72); }
+    .agent-form input { min-width: 0; min-height: 44px; border-radius: 999px; border: 1px solid rgba(255,216,107,.14); background: rgba(255,255,255,.055); color: var(--ink); padding: 0 14px; outline: none; }
+    .agent-form input:focus { border-color: rgba(255,216,107,.52); box-shadow: 0 0 0 4px rgba(255,216,107,.09); }
+    .agent-form button { min-height: 44px; border: 0; border-radius: 999px; background: var(--gold); color: #16091f; padding: 0 15px; font-weight: 800; cursor: pointer; }
+
+    .reveal { opacity: 1; transform: none; }
+    .js .reveal { opacity: 0; transform: translateY(28px); filter: blur(10px); transition: opacity .85s var(--ease), transform .85s var(--ease), filter .85s var(--ease); }
+    .js .reveal.is-visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (min-width: 2100px) { :root { --max: 2040px; } .hero { grid-template-columns: minmax(650px, .9fr) minmax(860px, 1.1fr); } .shell { width: min(var(--max), calc(100% - 260px)); } }
+    @media (max-width: 1180px) { .hero, .capability-grid, .work-band, .motion-card, .agent-card, .cta { grid-template-columns: 1fr; } .hero { min-height: auto; } .hero-visual { min-height: auto; } .capability:first-child { grid-row: auto; min-height: auto; } .capability:nth-child(3) { transform: none; } .intro { max-width: 100%; } }
+    @media (max-width: 760px) { .shell { width: min(100% - 28px, var(--max)); } .nav-links { display: none; } .brand { letter-spacing: .12em; font-size: 12px; } .hero { padding-top: 48px; gap: 36px; } h1 { font-size: clamp(56px, 16vw, 86px); } h2 { font-size: clamp(43px, 13vw, 76px); } .visual-shell { transform: none; } .floating-chip { display: none; } .section { padding: 78px 0; } .proof-item { min-height: auto; } .hero-proof { grid-template-columns: 1fr; } .pill { width: 100%; } .hero-actions { width: 100%; } .cta { padding: 32px; } .agent-launch { right: 14px; bottom: 14px; left: 14px; justify-content: center; } .agent-panel { right: 14px; left: 14px; bottom: 78px; width: auto; } }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } .js .reveal { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body>
+  <script>document.documentElement.classList.add('js');</script>
+  <nav class="nav">
+    <div class="shell nav-inner">
+      <a class="brand" href="#top" aria-label="Ony-Labs Startseite"><span class="mark"></span><span>Ony-Labs</span></a>
+      <div class="nav-links" aria-label="Hauptnavigation">
+        <a href="#studio">Studio</a>
+        <a href="#felder">Felder</a>
+        <a href="#methode">Methode</a>
+        <a href="#agent">Agent</a>
+      </div>
+      <a class="pill" href="#kontakt">Anfrage starten</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="shell hero">
+      <div class="reveal">
+        <span class="micro">Schweizer Kreativtechnologie-Studio</span>
+        <h1>Marke, Websites und digitale Systeme. Klar geführt.</h1>
+        <p class="hero-copy">Ony-Labs entwickelt Markenauftritte, Websites, Automationen, Medienwelten und kontrollierte digitale Systeme, die stark wirken und sauber funktionieren.</p>
+        <div class="hero-actions">
+          <a class="pill primary" href="#felder">Felder ansehen</a>
+          <a class="pill" href="#methode">Wie wir arbeiten</a>
+        </div>
+        <div class="hero-proof" aria-label="Ony-Labs Schwerpunkte">
+          <div class="proof-item"><strong>Marke & Web</strong> Identität, Oberfläche, Produktseite.</div>
+          <div class="proof-item"><strong>Automationen</strong> Workflows, Agenten, interne Systeme.</div>
+          <div class="proof-item"><strong>Medien & KI</strong> Visuals, Musik, lokale KI, Prototypen.</div>
+        </div>
+      </div>
+      <div class="hero-visual reveal" aria-label="Ony-Labs Kreativsystem-Visual">
+        <span class="floating-chip one">Markensystem</span>
+        <span class="floating-chip two">Kontrollierte Technologie</span>
+        <figure class="visual-shell">
+          <div class="visual-inner">
+            <img src="assets/ony-labs-creative-systems-hero.png" alt="Abstraktes Ony-Labs System aus Marke, Design, Automation, Medien und Technologie">
+            <figcaption class="visual-note"><strong>Ein Studio für das ganze System.</strong><span>Nicht nur KI. Auch Marke, Oberfläche, Content, Workflows und Produkte.</span></figcaption>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="studio">
+      <div class="shell">
+        <div class="intro reveal">
+          <h2>Breiter als ein KI-Studio.</h2>
+          <p class="lead">Ony-Labs verbindet visuelle Identität, Webdesign, Automationen, lokale KI, Musik, Medienproduktion und Produktentwicklung zu einem kontrollierten digitalen System.</p>
+        </div>
+        <div class="work-band">
+          <article class="statement reveal">
+            <strong>Die Marke bleibt vorne. Die Technik arbeitet dahinter.</strong>
+            <span>Die öffentliche Seite soll klar, hochwertig und verständlich sein. Interne Systeme, Experimente und Agenten bleiben geschützt.</span>
+          </article>
+          <div class="method-list reveal">
+            <article class="method"><small>Strategie</small><h3>Strategie und Identität</h3><p>Positionierung, visuelle Richtung, Sprache, Angebot und eine klare Linie für alle öffentlichen Flächen.</p></article>
+            <article class="method"><small>Oberfläche</small><h3>Website und Produktoberfläche</h3><p>Schnelle, responsive Seiten, starke erste Eindrücke, saubere Nutzerführung und vorbereitete Conversion-Pfade.</p></article>
+            <article class="method"><small>System</small><h3>Automation und interne Systeme</h3><p>Workflows, Assistenten, Lead-Vorbereitung, Content-Pipelines und lokale Datenräume mit klaren Freigabegrenzen.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="felder">
+      <div class="shell">
+        <div class="intro reveal">
+          <h2>Felder, die zusammen wirken.</h2>
+          <p class="lead">Die Website zeigt nicht eine einzelne Technologie. Sie zeigt ein Studio, das Design, Code, Medien und KI als zusammenhängendes Betriebssystem denkt.</p>
+        </div>
+        <div class="capability-grid">
+          <article class="capability reveal">
+            <div><small>Kreativsysteme</small><h3>Marken, Websites und digitale Produkte.</h3><p>Von der visuellen Richtung bis zur fertigen Oberfläche. Hochwertig, schnell, responsive und mit einer klaren Geschichte.</p></div>
+            <p>Das ist der öffentliche Kern: Menschen verstehen zuerst die Qualität, nicht die interne Technik.</p>
+          </article>
+          <article class="capability reveal"><div><small>Automationen</small><h3>Workflows, Agenten und Prozesse.</h3><p>Automationen, die Arbeit vorbereiten, sortieren und beschleunigen, ohne wichtige Entscheidungen aus der Hand zu nehmen.</p></div></article>
+          <article class="capability reveal"><div><small>Medien</small><h3>Visuals, Musik und Bewegung.</h3><p>Bildwelten, kurze Motion-Assets, Musikideen, Kampagnenflächen und Content, der zur Marke passt.</p></div></article>
+          <article class="capability reveal"><div><small>Familien-Sicherheit</small><h3>Voice-Clone Scam Drill für Familien.</h3><p>Ein kostenloser Sicherheitsdrill zeigt, wie echte Stimmen missbraucht werden können und welche Absprachen Familien im Alltag schützen.</p></div></article>
+          <article class="capability reveal"><div><small>Lokale KI</small><h3>Private KI und Memory-Systeme.</h3><p>Lokale Modelle, private Wissensräume, sichere Hilfssysteme und kontrollierte Agenten für interne Arbeit.</p></div></article>
+          <article class="capability reveal"><div><small>Prototypen</small><h3>Ideen schnell sichtbar machen.</h3><p>Lokale Prototypen, Review-Pakete, Interfaces, kleine Produkte und Tests, bevor etwas öffentlich wird.</p></div></article>
+        </div>
+
+        <article class="motion-card reveal">
+          <div>
+            <h3>Bewegung mit Zweck.</h3>
+            <p>Motion soll später bewusst eingesetzt werden: für Markenmomente, Hero-Loops, Produkt-Erklärungen und hochwertige Übergänge. Nicht als Dekoration, sondern als Orientierung.</p>
+          </div>
+          <div class="video-shell">
+            <video autoplay muted loop playsinline poster="assets/ony-labs-founder-mark-board.jpg">
+              <source src="assets/video/ony-labs-hero-loop.mp4" type="video/mp4">
+            </video>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="methode">
+      <div class="shell intro reveal">
+        <h2>Kontrolliert von der Idee bis zur Veröffentlichung.</h2>
+        <p class="lead">Recherche, Konzept, Design, Prototyp, Review und Veröffentlichung laufen in klaren Stufen. Öffentliche Wirkung entsteht erst, wenn Inhalt, Risiko und Qualität stimmen.</p>
+      </div>
+      <div class="shell work-band">
+        <aside class="statement reveal"><strong>Professionell nach außen. Strukturiert nach innen.</strong><span>Genau diese Trennung macht Ony-Labs langfristig belastbar.</span></aside>
+        <div class="method-list reveal">
+          <article class="method"><small>Recherche</small><h3>Gute Referenzen, klare Richtung</h3><p>Award-Websites nutzen starke Typografie, große visuelle Momente, scrollbasierte Dramaturgie und klare Projektgeschichten. Wir übernehmen das Prinzip, nicht die Vorlage.</p></article>
+          <article class="method"><small>Aufbau</small><h3>Erst Oberfläche, dann Tiefe</h3><p>Die Homepage wird auf Hochdeutsch sauber aufgebaut. Weitere Sprachen, Motion und echte Lead-Systeme kommen erst, wenn die Basis sitzt.</p></article>
+          <article class="method"><small>Freigabe</small><h3>Kein öffentlicher Schritt ohne Gate</h3><p>Veröffentlichung, Tracking, Kontaktwege, Angebote und externe Automationen bleiben freigabepflichtig.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="agent">
+      <div class="shell">
+        <article class="agent-card reveal">
+          <div>
+            <h3>Ony-Labs Agent.</h3>
+            <p>Ein öffentliches Studio-Interface für Fragen, Projektideen und erste Orientierung. Er bleibt getrennt von Zero und Megaman X und gibt keine verbindlichen Zusagen.</p>
+          </div>
+          <div class="agent-preview" aria-label="Ony-Labs Agent Vorschau">
+            <div class="bubble"><strong>Ony-Labs Agent</strong><br>Ich helfe dabei, ein Projekt einzuordnen und eine klare Anfrage vorzubereiten.</div>
+            <div class="bubble user">Ich möchte eine Website mit Automationen aufbauen.</div>
+            <div class="bubble">Was ist das wichtigste Ziel, das damit erreicht werden soll?</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-wrap" id="kontakt">
+      <div class="shell">
+        <div class="cta reveal">
+          <div>
+            <h2>Ein erstes Projekt sauber einordnen.</h2>
+            <p>Ony-Labs kann Ideen, Websites, Automationen, Medienflächen und KI-Systeme vorbereiten. Der nächste Schritt ist eine klare, geprüfte Anfrage.</p>
+          </div>
+          <a class="pill primary" href="mailto:hello@ony-labs.com">Anfrage starten</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <span>Ony-Labs</span>
+      <span>Kreativtechnologie-Studio für Marke, Web, Medien, Automation und kontrollierte KI.</span>
+    </div>
+  </footer>
+
+  <button class="agent-launch" type="button" data-agent-launch>Ony-Labs Agent</button>
+  <aside class="agent-panel" data-agent-panel aria-label="Ony-Labs Agent" aria-live="polite">
+    <div class="agent-head">
+      <div>
+        <strong>Ony-Labs Agent</strong>
+        <span>Projektorientierung - Anfrageentwurf - geprüfter nächster Schritt</span>
+      </div>
+      <button class="agent-close" type="button" data-agent-close aria-label="Ony-Labs Agent schließen">×</button>
+    </div>
+    <div class="agent-log" data-agent-log></div>
+    <div class="agent-quick" data-agent-quick>
+      <button class="agent-chip" type="button" data-agent-prompt="Ich möchte ein Projekt mit Ony-Labs besprechen.">Projekt besprechen</button>
+      <button class="agent-chip" type="button" data-agent-prompt="Was macht Ony-Labs?">Was macht Ony-Labs?</button>
+      <button class="agent-chip" type="button" data-agent-prompt="I want to build a controlled digital system.">Anfrage auf Englisch</button>
+    </div>
+    <form class="agent-form" data-agent-form>
+      <input data-agent-input autocomplete="off" placeholder="Projekt oder Frage beschreiben" aria-label="Nachricht an den Ony-Labs Agent">
+      <button type="submit">Senden</button>
+    </form>
+  </aside>
+
+  <script>
+    (() => {
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealItems.forEach(item => revealObserver.observe(item));
+      } else {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+      }
+
+      const launch = document.querySelector('[data-agent-launch]');
+      const panel = document.querySelector('[data-agent-panel]');
+      const close = document.querySelector('[data-agent-close]');
+      const form = document.querySelector('[data-agent-form]');
+      const input = document.querySelector('[data-agent-input]');
+      const log = document.querySelector('[data-agent-log]');
+      const quick = document.querySelector('[data-agent-quick]');
+      const state = { lang: 'de', stage: 'start', lead: {} };
+      const copy = {
+        en: {
+          intro: "I’m the Ony-Labs Agent. I can help you frame your project and prepare a clear request for Ony-Labs.",
+          explain: "Ony-Labs is a Swiss creative technology studio for brand systems, websites, automation, media, local AI workflows, and controlled digital products.",
+          leadStart: "Good. I’ll structure it. What do you want to build, and who is it for?",
+          askGoal: "What is the main goal or problem this should solve?",
+          askStatus: "Do you already have a website, app, workflow, files, or an existing system?",
+          askContact: "How should Ony-Labs contact you if this becomes a real project request?",
+          boundary: "I can prepare orientation and a project brief. Prices, contracts, legal details, payments, deployments, and final commitments stay owner-approved.",
+          fallback: "Describe the project in one or two sentences. I can help with websites, brand systems, automation, media, local AI workflows, and controlled agent setups.",
+          summaryTitle: "Project request draft",
+          mail: "Prepare email"
+        },
+        de: {
+          intro: "Ich bin der Ony-Labs Agent. Ich helfe dabei, ein Projekt einzuordnen und eine klare Anfrage an Ony-Labs vorzubereiten.",
+          explain: "Ony-Labs ist ein Schweizer Kreativtechnologie-Studio für Marken, Websites, Automationen, Medien, lokale KI-Workflows und kontrollierte digitale Produkte.",
+          leadStart: "Gut. Ich strukturiere das. Was soll gebaut werden, und für wen ist es gedacht?",
+          askGoal: "Was ist das wichtigste Ziel oder Problem, das damit gelöst werden soll?",
+          askStatus: "Gibt es bereits eine Website, App, einen Workflow, Dateien oder ein bestehendes System?",
+          askContact: "Wie soll Ony-Labs dich kontaktieren, wenn daraus eine echte Projektanfrage wird?",
+          boundary: "Ich kann Orientierung und ein Projekt-Briefing vorbereiten. Preise, Verträge, Rechtliches, Zahlungen, Deployments und finale Zusagen bleiben freigabepflichtig.",
+          fallback: "Beschreibe das Projekt am besten in ein bis zwei Sätzen. Ich kann bei Websites, Markenaufbau, Automation, Medien, lokalen KI-Workflows und kontrollierten Agenten helfen.",
+          summaryTitle: "Projektanfrage Entwurf",
+          mail: "E-Mail vorbereiten"
+        }
+      };
+      function detectLang(text) {
+        const t = text.toLowerCase();
+        if (/[äöüß]|\b(ich|möchte|moechte|projekt|bauen|kontakt|was|macht|für|fuer|euch|mir|danke|eine|einen|der|die|das|schon|aber|kein|keine|soll|sollte|kann|können|koennen|website|automatisierung|automation|medien|marke)\b/.test(t)) return 'de';
+        if (/\b(i|we|you|want|build|project|contact|what|who|for|website|automation|agent|system|workflow|already|have|need|help|brand|media)\b/.test(t)) return 'en';
+        return null;
+      }
+      function c(key) { return copy[state.lang][key]; }
+      function add(text, role = 'system') {
+        const el = document.createElement('div');
+        el.className = `agent-msg ${role}`;
+        el.textContent = text;
+        log.appendChild(el);
+        log.scrollTop = log.scrollHeight;
+      }
+      function summary() {
+        return [
+          c('summaryTitle'),
+          state.lang === 'de' ? `Projekt: ${state.lead.project || '-'}` : `Project: ${state.lead.project || '-'}`,
+          state.lang === 'de' ? `Ziel: ${state.lead.goal || '-'}` : `Goal: ${state.lead.goal || '-'}`,
+          state.lang === 'de' ? `Aktueller Stand: ${state.lead.status || '-'}` : `Current status: ${state.lead.status || '-'}`,
+          state.lang === 'de' ? `Kontakt: ${state.lead.contact || '-'}` : `Contact: ${state.lead.contact || '-'}`,
+          state.lang === 'de' ? 'Nächster Schritt: Prüfung durch Ony-Labs / freigegebene Antwort' : 'Next step: Ony-Labs review / owner-approved response'
+        ].join('\n');
+      }
+      function addMailButton() {
+        const a = document.createElement('a');
+        a.className = 'agent-msg system';
+        a.href = `mailto:hello@ony-labs.com?subject=${encodeURIComponent('Ony-Labs project request')}&body=${encodeURIComponent(summary())}`;
+        a.textContent = `${c('mail')}:\n${summary()}`;
+        log.appendChild(a);
+        log.scrollTop = log.scrollHeight;
+      }
+      function respond(text) {
+        const detectedLang = detectLang(text);
+        if (detectedLang) state.lang = detectedLang;
+        const t = text.toLowerCase();
+        if (state.stage === 'project') { state.lead.project = text; state.stage = 'goal'; add(c('askGoal')); return; }
+        if (state.stage === 'goal') { state.lead.goal = text; state.stage = 'status'; add(c('askStatus')); return; }
+        if (state.stage === 'status') { state.lead.status = text; state.stage = 'contact'; add(c('askContact')); return; }
+        if (state.stage === 'contact') { state.lead.contact = text; state.stage = 'done'; addMailButton(); return; }
+        if (/price|cost|kosten|preis|vertrag|legal|recht|zahlung|payment|deploy/.test(t)) { add(c('boundary')); return; }
+        if (/what|was macht|ony-labs|ony labs|studio/.test(t)) { add(c('explain')); return; }
+        if (/build|project|projekt|bauen|automation|agent|website|app|system|workflow|kontakt|besprechen|marke|brand|media|medien/.test(t)) {
+          if (text.length > 24 && !/besprechen$|discuss$/.test(t)) {
+            state.lead.project = text;
+            state.stage = 'goal';
+            add(c('askGoal'));
+          } else {
+            state.stage = 'project';
+            add(c('leadStart'));
+          }
+          return;
+        }
+        add(c('fallback'));
+      }
+      launch.addEventListener('click', () => {
+        const open = panel.getAttribute('data-open') === 'true';
+        panel.setAttribute('data-open', open ? 'false' : 'true');
+        if (!open && !log.children.length) add(copy.de.intro);
+        if (!open) input.focus();
+      });
+      close.addEventListener('click', () => panel.setAttribute('data-open', 'false'));
+      quick.addEventListener('click', e => {
+        const btn = e.target.closest('[data-agent-prompt]');
+        if (!btn) return;
+        const text = btn.getAttribute('data-agent-prompt');
+        add(text, 'user');
+        respond(text);
+      });
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
+        add(text, 'user');
+        input.value = '';
+        respond(text);
+      });
+    })();
+  </script>
+</body>
+</html>
