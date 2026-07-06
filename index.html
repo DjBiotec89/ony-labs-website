@@ -254,8 +254,21 @@
       .hero-copy, .lead { max-width: 100%; overflow-wrap: break-word; }
       .capability, .statement, .method, .motion-card, .agent-card, .cta { border-radius: 28px; }
       .cta { padding: 32px; }
-      .agent-launch { right: 14px; bottom: 14px; left: auto; min-height: 46px; padding: 0 15px; font-size: 14px; justify-content: center; }
-      .agent-panel { right: 14px; left: 14px; bottom: 72px; width: auto; }
+      .agent-launch {
+        right: 14px;
+        bottom: calc(18px + env(safe-area-inset-bottom));
+        left: auto;
+        width: 52px;
+        min-width: 52px;
+        min-height: 52px;
+        padding: 0;
+        justify-content: center;
+        gap: 0;
+        font-size: 0;
+      }
+      .agent-launch::before { width: 8px; height: 8px; box-shadow: 0 0 0 7px rgba(22,9,31,.13); }
+      .agent-launch::after { content: "↗"; margin-left: 9px; font-size: 17px; line-height: 1; }
+      .agent-panel { right: 14px; left: 14px; bottom: calc(82px + env(safe-area-inset-bottom)); width: auto; max-height: min(680px, calc(100dvh - 112px - env(safe-area-inset-bottom))); }
     }
     @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } .js .reveal { opacity: 1; transform: none; } }
   </style>
