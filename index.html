@@ -145,10 +145,10 @@
     .proof-item { padding: 16px 18px; border: 1px solid rgba(255,216,107,.14); border-radius: 18px; background: rgba(255,255,255,.036); color: var(--muted); font-size: 13px; }
     .proof-item strong { display: block; color: var(--ink); margin-bottom: 3px; font-size: 14px; }
 
-    .hero-visual { position: relative; min-height: clamp(520px, 54vw, 850px); display: grid; place-items: center; }
+    .hero-visual { position: relative; width: 100%; min-height: clamp(520px, 54vw, 850px); display: grid; place-items: center; justify-self: center; padding-inline: clamp(0px, 1.4vw, 26px); }
     .hero-visual::before, .hero-visual::after { content: ""; position: absolute; inset: 9%; border-radius: 999px; border: 1px solid rgba(255,216,107,.14); animation: spin 34s linear infinite; }
     .hero-visual::after { inset: 22%; border-color: rgba(125,92,255,.24); animation-duration: 42s; animation-direction: reverse; }
-    .visual-shell { position: relative; z-index: 2; width: min(100%, 860px); border-radius: clamp(30px, 2.7vw, 50px); padding: clamp(10px, 1vw, 16px); border: 1px solid rgba(255,216,107,.24); background: linear-gradient(145deg, rgba(255,216,107,.11), rgba(125,92,255,.08)), rgba(16,7,24,.76); box-shadow: 0 44px 140px rgba(0,0,0,.56), 0 0 90px rgba(125,92,255,.16); transform: rotate(-1deg); }
+    .visual-shell { position: relative; z-index: 2; width: min(94%, 800px); margin-inline: auto; border-radius: clamp(30px, 2.7vw, 50px); padding: clamp(10px, 1vw, 16px); border: 1px solid rgba(255,216,107,.24); background: linear-gradient(145deg, rgba(255,216,107,.11), rgba(125,92,255,.08)), rgba(16,7,24,.76); box-shadow: 0 44px 140px rgba(0,0,0,.56), 0 0 90px rgba(125,92,255,.16); transform: none; }
     .visual-inner { position: relative; overflow: hidden; border-radius: calc(clamp(30px, 2.7vw, 50px) - 10px); background: #100718; border: 1px solid rgba(255,255,255,.08); }
     .visual-inner img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 50%; filter: saturate(1.05) contrast(1.04); }
     .visual-inner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,3,11,.10), transparent 46%, rgba(7,3,11,.28)), linear-gradient(180deg, transparent 58%, rgba(7,3,11,.62)); pointer-events: none; }
@@ -156,8 +156,8 @@
     .visual-note strong { display: block; font-size: clamp(16px, 1.1vw, 22px); letter-spacing: -.03em; }
     .visual-note span { display: block; color: var(--muted); margin-top: 5px; }
     .floating-chip { position: absolute; z-index: 4; padding: 11px 14px; border-radius: 999px; border: 1px solid rgba(255,216,107,.22); background: rgba(20,10,30,.72); color: var(--gold); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 14px 44px rgba(0,0,0,.34); }
-    .floating-chip.one { left: -2%; top: 18%; }
-    .floating-chip.two { right: -1%; bottom: 22%; color: #d8caff; border-color: rgba(125,92,255,.30); }
+    .floating-chip.one { left: clamp(14px, 2vw, 34px); top: 15%; }
+    .floating-chip.two { right: clamp(14px, 2vw, 34px); bottom: 18%; color: #d8caff; border-color: rgba(125,92,255,.30); }
 
     .intro { max-width: min(1160px, 80vw); }
     h2 { font-size: clamp(48px, 6vw, 128px); line-height: .87; letter-spacing: -.074em; max-width: 11ch; text-wrap: balance; }
@@ -229,7 +229,34 @@
 
     @media (min-width: 2100px) { :root { --max: 2040px; } .hero { grid-template-columns: minmax(650px, .9fr) minmax(860px, 1.1fr); } .shell { width: min(var(--max), calc(100% - 260px)); } }
     @media (max-width: 1180px) { .hero, .capability-grid, .work-band, .motion-card, .agent-card, .cta { grid-template-columns: 1fr; } .hero { min-height: auto; } .hero-visual { min-height: auto; } .capability:first-child { grid-row: auto; min-height: auto; } .capability:nth-child(3) { transform: none; } .intro { max-width: 100%; } }
-    @media (max-width: 760px) { .shell { width: min(100% - 28px, var(--max)); } .nav-links { display: none; } .brand { letter-spacing: .12em; font-size: 12px; } .hero { padding-top: 48px; gap: 36px; } h1 { font-size: clamp(56px, 16vw, 86px); } h2 { font-size: clamp(43px, 13vw, 76px); } .visual-shell { transform: none; } .floating-chip { display: none; } .section { padding: 78px 0; } .proof-item { min-height: auto; } .hero-proof { grid-template-columns: 1fr; } .pill { width: 100%; } .hero-actions { width: 100%; } .cta { padding: 32px; } .agent-launch { right: 14px; bottom: 14px; left: 14px; justify-content: center; } .agent-panel { right: 14px; left: 14px; bottom: 78px; width: auto; } }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 36px, var(--max)); }
+      .nav-inner { gap: 12px; }
+      .nav-links { display: none; }
+      .brand { letter-spacing: .10em; font-size: 12px; }
+      .brand .mark { width: 36px; height: 36px; border-radius: 13px; }
+      .hero { padding-top: 46px; gap: 34px; }
+      .micro { max-width: 100%; letter-spacing: .16em; font-size: 10px; }
+      h1 { font-size: clamp(48px, 13.6vw, 72px); line-height: .88; letter-spacing: -.062em; max-width: 10.8ch; }
+      h2 { font-size: clamp(40px, 11.6vw, 66px); line-height: .9; letter-spacing: -.056em; }
+      .hero-copy, .lead { font-size: clamp(16px, 4.7vw, 19px); line-height: 1.44; }
+      .hero-visual { padding-inline: 0; }
+      .visual-shell { width: 100%; transform: none; }
+      .visual-inner img { aspect-ratio: 4 / 3; object-position: 50% 50%; }
+      .visual-note { left: 14px; right: 14px; bottom: 14px; padding: 14px 15px; border-radius: 18px; font-size: 13px; }
+      .floating-chip { display: none; }
+      .section { padding: 78px 0; }
+      .proof-item { min-height: auto; }
+      .hero-proof { grid-template-columns: 1fr; }
+      .nav .pill { width: auto; min-width: 0; padding: 0 13px 0 15px; font-size: 14px; }
+      .hero-actions .pill, .cta .pill { width: 100%; }
+      .hero-actions { width: 100%; }
+      .hero-copy, .lead { max-width: 100%; overflow-wrap: break-word; }
+      .capability, .statement, .method, .motion-card, .agent-card, .cta { border-radius: 28px; }
+      .cta { padding: 32px; }
+      .agent-launch { right: 14px; bottom: 14px; left: auto; min-height: 46px; padding: 0 15px; font-size: 14px; justify-content: center; }
+      .agent-panel { right: 14px; left: 14px; bottom: 72px; width: auto; }
+    }
     @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } .js .reveal { opacity: 1; transform: none; } }
   </style>
 </head>
