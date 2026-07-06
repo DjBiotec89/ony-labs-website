@@ -150,7 +150,7 @@
     .hero-visual::after { inset: 22%; border-color: rgba(125,92,255,.24); animation-duration: 42s; animation-direction: reverse; }
     .visual-shell { position: relative; z-index: 2; width: min(94%, 800px); margin-inline: auto; border-radius: clamp(30px, 2.7vw, 50px); padding: clamp(10px, 1vw, 16px); border: 1px solid rgba(255,216,107,.24); background: linear-gradient(145deg, rgba(255,216,107,.11), rgba(125,92,255,.08)), rgba(16,7,24,.76); box-shadow: 0 44px 140px rgba(0,0,0,.56), 0 0 90px rgba(125,92,255,.16); transform: none; }
     .visual-inner { position: relative; overflow: hidden; border-radius: calc(clamp(30px, 2.7vw, 50px) - 10px); background: #100718; border: 1px solid rgba(255,255,255,.08); }
-    .visual-inner img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 50%; filter: saturate(1.05) contrast(1.04); }
+    .visual-inner img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 62% 50%; filter: saturate(1.05) contrast(1.04); transform: translateX(-6%) scale(1.12); transform-origin: center; }
     .visual-inner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,3,11,.10), transparent 46%, rgba(7,3,11,.28)), linear-gradient(180deg, transparent 58%, rgba(7,3,11,.62)); pointer-events: none; }
     .visual-note { position: absolute; left: clamp(18px, 2vw, 32px); right: clamp(18px, 2vw, 32px); bottom: clamp(18px, 2vw, 32px); z-index: 3; padding: 18px 20px; border-radius: 22px; border: 1px solid rgba(255,216,107,.18); background: rgba(13,7,18,.66); backdrop-filter: blur(18px) saturate(150%); }
     .visual-note strong { display: block; font-size: clamp(16px, 1.1vw, 22px); letter-spacing: -.03em; }
@@ -242,7 +242,7 @@
       .hero-copy, .lead { font-size: clamp(16px, 4.7vw, 19px); line-height: 1.44; }
       .hero-visual { padding-inline: 0; }
       .visual-shell { width: 100%; transform: none; }
-      .visual-inner img { aspect-ratio: 4 / 3; object-position: 50% 50%; }
+      .visual-inner img { aspect-ratio: 4 / 3; object-position: 62% 50%; transform: translateX(-7%) scale(1.14); }
       .visual-note { left: 14px; right: 14px; bottom: 14px; padding: 14px 15px; border-radius: 18px; font-size: 13px; }
       .floating-chip { display: none; }
       .section { padding: 78px 0; }
@@ -295,7 +295,7 @@
         <h1>Marke, Websites und digitale Systeme. Klar geführt.</h1>
         <p class="hero-copy">Ony-Labs entwickelt Markenauftritte, Websites, Automationen, Medienwelten und kontrollierte digitale Systeme, die stark wirken und sauber funktionieren.</p>
         <div class="hero-actions">
-          <a class="pill primary" href="#felder">Felder ansehen</a>
+          <a class="pill primary" href="#studio">Studio entdecken</a>
           <a class="pill" href="#methode">Wie wir arbeiten</a>
         </div>
         <div class="hero-proof" aria-label="Ony-Labs Schwerpunkte">
