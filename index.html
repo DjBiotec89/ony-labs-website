@@ -217,12 +217,18 @@
     .statement { min-height: clamp(420px, 30vw, 640px); padding: clamp(34px, 4vw, 70px); border-radius: 42px; border: 1px solid var(--line); background: linear-gradient(145deg, #ffd86b, #edae45); color: #16091f; display: flex; flex-direction: column; justify-content: space-between; }
     .statement strong { font-size: clamp(42px, 5vw, 106px); line-height: .86; letter-spacing: -.075em; max-width: 9.5ch; }
     .statement span { max-width: 48ch; color: rgba(22,9,31,.68); font-weight: 640; }
-    .method-list { display: grid; gap: clamp(14px, 1.4vw, 24px); }
+    .method-list { position: relative; display: grid; gap: clamp(14px, 1.4vw, 24px); }
+    .method-list::before { content: ""; position: absolute; left: -18px; top: 6px; bottom: 6px; width: 1px; background: linear-gradient(180deg, transparent, rgba(255,216,107,.72), rgba(125,92,255,.44), transparent); transform: scaleY(0); transform-origin: top; opacity: .85; transition: transform 1.2s var(--ease); }
+    .method-list.is-visible::before, .reveal.is-visible .method-list::before { transform: scaleY(1); }
+    .method::after, .capability::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(115deg, transparent 0 38%, rgba(255,216,107,.16) 48%, rgba(125,92,255,.10) 54%, transparent 66%); transform: translateX(-120%); transition: opacity .45s var(--ease), transform .9s var(--ease); }
+    .method:hover::after, .capability:hover::after, .method:focus-within::after, .capability:focus-within::after { opacity: 1; transform: translateX(120%); }
     .method { position: relative; overflow: hidden; padding: clamp(24px, 2.5vw, 44px); border-radius: 28px; border: 1px solid rgba(125,92,255,.22); background: rgba(255,255,255,.045); transition: transform .72s var(--ease), border-color .72s var(--ease), background .72s var(--ease), box-shadow .72s var(--ease); }
     .method h3 { margin-top: 12px; font-size: clamp(24px, 2.2vw, 48px); line-height: .96; letter-spacing: -.045em; }
     .method p { color: var(--muted); margin-top: 12px; max-width: 62ch; }
 
-    .motion-card { margin-top: clamp(50px, 6vw, 100px); display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(22px, 4vw, 80px); align-items: center; padding: clamp(30px, 4vw, 76px); border-radius: 44px; border: 1px solid rgba(255,216,107,.16); background: radial-gradient(circle at 80% 12%, rgba(255,216,107,.14), transparent 24rem), linear-gradient(135deg, rgba(125,92,255,.12), rgba(255,255,255,.035)); box-shadow: inset 0 1px 0 rgba(255,255,255,.065); }
+    .motion-card { position: relative; overflow: hidden; margin-top: clamp(50px, 6vw, 100px); display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(22px, 4vw, 80px); align-items: center; padding: clamp(30px, 4vw, 76px); border-radius: 44px; border: 1px solid rgba(255,216,107,.16); background: radial-gradient(circle at 80% 12%, rgba(255,216,107,.14), transparent 24rem), linear-gradient(135deg, rgba(125,92,255,.12), rgba(255,255,255,.035)); box-shadow: inset 0 1px 0 rgba(255,255,255,.065); }
+    .motion-card::before { content: ""; position: absolute; left: 28px; right: 28px; top: 18px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,216,107,.78), rgba(125,92,255,.56), transparent); transform: scaleX(0); transform-origin: left; opacity: .75; transition: transform 1.15s var(--ease); }
+    .motion-card.is-visible::before { transform: scaleX(1); }
     .motion-card h3 { font-size: clamp(40px, 4.8vw, 98px); line-height: .88; letter-spacing: -.072em; max-width: 10ch; }
     .motion-card p { color: var(--muted); margin-top: 22px; font-size: clamp(17px, 1.18vw, 24px); max-width: 58ch; }
     .video-shell { position: relative; border-radius: 30px; padding: 10px; border: 1px solid rgba(255,216,107,.18); background: rgba(9,4,13,.72); overflow: hidden; transition: transform .75s var(--ease), border-color .75s var(--ease), box-shadow .75s var(--ease); }
@@ -239,7 +245,9 @@
     .bubble strong { color: var(--gold); }
 
     .cta-wrap { padding: clamp(100px, 11vw, 190px) 0; border-top: 1px solid rgba(255,216,107,.1); }
-    .cta { border-radius: clamp(34px, 3vw, 58px); background: radial-gradient(circle at 86% 18%, rgba(255,216,107,.22), transparent 30rem), radial-gradient(circle at 20% 100%, rgba(125,92,255,.22), transparent 30rem), linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.028)); border: 1px solid rgba(255,216,107,.18); padding: clamp(38px, 5vw, 86px); display: grid; grid-template-columns: 1fr auto; gap: 34px; align-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+    .cta { position: relative; overflow: hidden; border-radius: clamp(34px, 3vw, 58px); background: radial-gradient(circle at 86% 18%, rgba(255,216,107,.22), transparent 30rem), radial-gradient(circle at 20% 100%, rgba(125,92,255,.22), transparent 30rem), linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.028)); border: 1px solid rgba(255,216,107,.18); padding: clamp(38px, 5vw, 86px); display: grid; grid-template-columns: 1fr auto; gap: 34px; align-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+    .cta::before { content: ""; position: absolute; inset: -30%; pointer-events: none; opacity: 0; background: conic-gradient(from 210deg at 72% 48%, transparent, rgba(255,216,107,.12), rgba(125,92,255,.12), transparent 38%); transform: rotate(-16deg) scale(.82); transition: opacity 1s var(--ease), transform 1.2s var(--ease); }
+    .cta.is-visible::before { opacity: 1; transform: rotate(0deg) scale(1); }
     .cta h2 { max-width: 12ch; }
     .cta p { margin-top: 18px; color: var(--muted); max-width: 62ch; font-size: clamp(17px, 1.18vw, 24px); }
 
@@ -248,8 +256,8 @@
 
     .agent-launch { position: fixed; right: 22px; bottom: 22px; z-index: 50; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 18px; border: 1px solid rgba(255,216,107,.42); border-radius: 999px; background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #16091f; font-weight: 820; letter-spacing: -.02em; box-shadow: 0 18px 50px rgba(0,0,0,.42); cursor: pointer; }
     .agent-launch::before { content: ""; width: 9px; height: 9px; border-radius: 999px; background: #16091f; box-shadow: 0 0 0 6px rgba(22,9,31,.12); }
-    .agent-panel { position: fixed; right: 22px; bottom: 88px; z-index: 49; width: min(440px, calc(100vw - 32px)); max-height: min(700px, calc(100dvh - 118px)); display: none; grid-template-rows: auto 1fr auto; overflow: hidden; border-radius: 28px; border: 1px solid rgba(255,216,107,.18); background: rgba(13,7,18,.95); box-shadow: 0 28px 90px rgba(0,0,0,.55); backdrop-filter: blur(24px); }
-    .agent-panel[data-open="true"] { display: grid; }
+    .agent-panel { position: fixed; right: 22px; bottom: 88px; z-index: 49; width: min(440px, calc(100vw - 32px)); max-height: min(700px, calc(100dvh - 118px)); display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; border-radius: 28px; border: 1px solid rgba(255,216,107,.18); background: rgba(13,7,18,.95); box-shadow: 0 28px 90px rgba(0,0,0,.55); backdrop-filter: blur(24px); opacity: 0; pointer-events: none; transform: translate3d(16px, 18px, 0) scale(.94); clip-path: inset(100% 0 0 100% round 28px); transition: opacity .48s var(--ease), transform .58s var(--ease), clip-path .58s var(--ease); transform-origin: bottom right; }
+    .agent-panel[data-open="true"] { opacity: 1; pointer-events: auto; transform: translate3d(0,0,0) scale(1); clip-path: inset(0 0 0 0 round 28px); }
     .agent-head { display: flex; align-items: start; justify-content: space-between; gap: 18px; padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,216,107,.12); }
     .agent-head strong { display: block; font-size: 16px; letter-spacing: -.025em; }
     .agent-head span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
@@ -469,8 +477,8 @@
     </div>
   </footer>
 
-  <button class="agent-launch" type="button" data-agent-launch>Ony-Labs Agent</button>
-  <aside class="agent-panel" data-agent-panel aria-label="Ony-Labs Agent" aria-live="polite">
+  <button class="agent-launch" type="button" data-agent-launch aria-expanded="false" aria-controls="ony-labs-agent-panel">Ony-Labs Agent</button>
+  <aside class="agent-panel" id="ony-labs-agent-panel" data-agent-panel aria-label="Ony-Labs Agent" aria-live="polite">
     <div class="agent-head">
       <div>
         <strong>Ony-Labs Agent</strong>
@@ -709,10 +717,11 @@
       launch.addEventListener('click', () => {
         const open = panel.getAttribute('data-open') === 'true';
         panel.setAttribute('data-open', open ? 'false' : 'true');
+        launch.setAttribute('aria-expanded', open ? 'false' : 'true');
         if (!open && !log.children.length) add(copy.de.intro);
         if (!open) input.focus();
       });
-      close.addEventListener('click', () => panel.setAttribute('data-open', 'false'));
+      close.addEventListener('click', () => { panel.setAttribute('data-open', 'false'); launch.setAttribute('aria-expanded', 'false'); launch.focus(); });
       quick.addEventListener('click', e => {
         const btn = e.target.closest('[data-agent-prompt]');
         if (!btn) return;
