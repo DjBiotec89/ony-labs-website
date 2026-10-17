@@ -1,0 +1,336 @@
+/* Additions only. The live stylesheet in site.css is unchanged. */
+
+.package-groups {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(36px, 5vw, 64px);
+}
+
+.package-group {
+  border-top: 1px solid var(--line-light);
+  padding-top: 28px;
+}
+
+.package-group h3 {
+  font-size: clamp(32px, 4vw, 64px);
+  letter-spacing: -.05em;
+  font-weight: 640;
+  line-height: .95;
+  max-width: 18ch;
+}
+
+.package-group h3 em {
+  display: block;
+  margin-top: .16em;
+  color: var(--gold-ink);
+  font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -.04em;
+  font-size: .58em;
+}
+
+.package-group-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: end;
+}
+
+.package-list {
+  margin-top: 8px;
+}
+
+.package-list li {
+  display: grid;
+  grid-template-columns: minmax(190px, .72fr) minmax(0, 1.5fr) auto;
+  gap: 12px 28px;
+  align-items: start;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.package-list strong {
+  font-size: clamp(18px, 1.6vw, 26px);
+  letter-spacing: -.03em;
+}
+
+.package-list p,
+.package-lead,
+.package-note,
+.package-highlight,
+.package-fine,
+.package-footnote,
+.package-bullets li,
+.suggestion-list li {
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.package-price {
+  font-weight: 760;
+  letter-spacing: -.03em;
+  white-space: nowrap;
+}
+
+.package-lead,
+.package-note,
+.package-highlight,
+.package-fine,
+.package-footnote,
+.package-bullets,
+.suggestion-list {
+  max-width: 76ch;
+  margin-top: 16px;
+}
+
+.package-highlight {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.package-bullets,
+.suggestion-list {
+  display: grid;
+  gap: 8px;
+}
+
+.package-bullets li {
+  padding-left: 16px;
+  position: relative;
+}
+
+.package-bullets li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--violet);
+  position: absolute;
+  left: 0;
+  top: .55em;
+}
+
+.package-group .story-link {
+  margin-top: 18px;
+}
+
+.suggestion-mark {
+  display: inline-block;
+  margin: 0 6px;
+  padding: 2px 6px;
+  border: 1px solid currentColor;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  font-weight: 760;
+  line-height: 1.4;
+  vertical-align: middle;
+  color: var(--gold-ink);
+}
+
+.package-footnote {
+  font-size: 13px;
+}
+
+.contact-form {
+  margin-top: 28px;
+  display: grid;
+  gap: 14px;
+  max-width: 640px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 680;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #fffaf230;
+  background: #fffaf20f;
+  color: var(--white);
+  padding: 12px 14px;
+  font: inherit;
+  border-radius: 0;
+}
+
+.contact-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.contact-form select {
+  color-scheme: dark;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 2px;
+}
+
+.contact-form .button {
+  justify-self: start;
+  cursor: pointer;
+  border: 0;
+}
+
+.contact-form .button:disabled {
+  opacity: .7;
+  cursor: progress;
+}
+
+.form-note,
+.form-status {
+  color: #fffaf2b8;
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
+.form-note a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.check-flag {
+  color: var(--gold-light);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  letter-spacing: .01em;
+  line-height: 1.5;
+}
+
+.contact-section .suggestion-mark {
+  color: var(--gold-light);
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.legal-page {
+  padding: calc(108px + clamp(28px, 4vw, 64px)) var(--gutter) var(--section-space);
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 70vh;
+}
+
+.legal-page h1 {
+  font-size: clamp(48px, 7vw, 92px);
+  letter-spacing: -.06em;
+  line-height: .9;
+  font-weight: 650;
+  max-width: 14ch;
+}
+
+.legal-page h2 {
+  margin-top: 1.5em;
+  font-size: clamp(26px, 3vw, 40px);
+  letter-spacing: -.04em;
+  line-height: 1.05;
+  font-weight: 650;
+  max-width: 24ch;
+}
+
+.legal-page p,
+.legal-page li {
+  max-width: 74ch;
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.7;
+  margin-top: .85em;
+}
+
+.legal-page ul {
+  margin-top: .4em;
+  display: grid;
+  gap: .2em;
+}
+
+.legal-page a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-page .check-flag,
+.legal-page .suggestion-mark {
+  color: var(--gold-ink);
+}
+
+.legal-page .section-kicker {
+  color: var(--violet);
+  margin-bottom: 18px;
+}
+
+.legal-note {
+  font-size: 13px;
+}
+
+noscript {
+  padding: 0;
+}
+
+.noscript-site {
+  padding: 32px var(--gutter) 64px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.noscript-site h1,
+.noscript-site h2,
+.noscript-site h3 {
+  letter-spacing: -.04em;
+  line-height: 1.05;
+  margin-top: 1.2em;
+}
+
+.noscript-site h1 { font-size: clamp(40px, 8vw, 72px); }
+.noscript-site h2 { font-size: clamp(28px, 4vw, 42px); }
+.noscript-site p,
+.noscript-site li {
+  max-width: 74ch;
+  color: var(--ink-soft);
+  margin-top: .7em;
+  line-height: 1.6;
+}
+
+.noscript-site a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (width <= 800px) {
+  .package-group-head,
+  .package-list li {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .package-price {
+    text-align: left;
+    white-space: normal;
+  }
+
+  .legal-page {
+    padding-top: 108px;
+  }
+
+  .legal-page p,
+  .legal-page li {
+    font-size: 16px;
+  }
+}
