@@ -1,52 +1,34 @@
-# Ony-Labs Website Local Draft
+# Ony-Labs Website
 
-Local static homepage draft for ony-labs.com.
+Source for the public one-pager at [www.ony-labs.com](https://www.ony-labs.com/).
 
-## Status
+The live site is still served from `DjBiotec89/DjBiotec89.github.io` (built files only). This repository did not contain that source. The React app here follows the live page — same copy, sections, and scroll story — and adds packages, legal pages, a contact form, and SEO files. Nothing in this branch is deployed.
 
-- Local only
-- No publish
-- No DNS change
-- No analytics
-- No tracking
-- No checkout
+## Preview locally
 
-## Open locally
+```bash
+npm install
+npm run dev
+```
 
-Open `index.html` in a browser or serve this folder with a static server.
+Open the URL Vite prints (usually http://localhost:5173/).
 
-## Current positioning
+Production build and preview:
 
-Ony-Labs is framed as a local-first AI product lab for owner-controlled AI, private memory, family sovereignty, and awareness kits.
+```bash
+npm run build
+npm run preview
+```
 
-## Current design pass
+Routes: `/`, `/impressum/`, `/datenschutz/`.
 
-The local draft now follows Ony's founder-mark theme:
+## Contact form
 
-- deep black/violet base
-- gold + violet accent system
-- founder-mark hero card from `assets/ony-labs-founder-mark-board.jpg`
-- larger responsive layout for ultrawide displays
-- mobile and tablet fallbacks through CSS media queries
+The form is not wired to a server. Submit opens an email to hello@ony-labs.com.
 
-## Ony-Labs Agent
+To use the included `public/kontakt.php` later on Infomaniak, set one of:
 
-The local draft includes a static **Ony-Labs Agent** website widget.
+- `VITE_CONTACT_ENDPOINT=/kontakt.php` at build time (see `.env.example`)
+- `window.ONY_LABS_CONTACT_ENDPOINT = "/kontakt.php"` in `index.html`
 
-- Public studio interface, not Zero or Megaman X.
-- Mirrors the visitor language silently.
-- Structures a project request draft.
-- Uses visitor-triggered `mailto:` handoff only.
-- No backend, tracking, external AI call, or deployment.
-
-Details: `../ONY_LABS_AGENT_V0.1.md`
-
-## Approval gate
-
-Before public launch, Ony should approve:
-
-1. Product families and names
-2. Public claims and safety boundaries
-3. Contact path
-4. Which product gets the first validation lane
-5. Whether to publish to ony-labs.com
+Leave both empty until that host is live. Do not change DNS or the GitHub Pages workflow from this branch.
