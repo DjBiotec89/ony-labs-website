@@ -47,7 +47,7 @@ footer{padding:30px 0 50px;color:var(--quiet);font-size:13px;border-top:1px soli
 /* Neues Game hinzufügen: Eintrag ergänzen und Ordner games/<slug>/ mit index.html anlegen. */
 const GAMES=[
  {slug:"monsterbonk",title:"MONSTERBONK",desc:"Browser-Survival: Monster sammeln, überleben, stärker werden.",tags:["Survival","Roguelite"],thumb:"",live:false},
- {slug:"aschenpfad",title:"ASCHENPFAD",X}
+ {slug:"aschenpfad",title:"ASCHENPFAD",desc:"Pixelart-Roguelike-Metroidvania im Browser.",tags:["Roguelike","Metroidvania","Handy + PC"],thumb:"",live:true}
 ];
 const g=document.getElementById("grid");
 g.innerHTML=GAMES.map(x=>`<a class="card" href="${x.live?x.slug+'/':'#'}" ${x.live?'':'aria-disabled="true"'}>
